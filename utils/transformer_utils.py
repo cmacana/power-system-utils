@@ -17,7 +17,7 @@ def short_circuit_impedance(vk_percent: float, vkr_percent: float, net_sn_mva: f
     return rk + xk * 1j
 
 
-def pu_impedance(z: float, net_sn_mva: float, net_vn_kv: float):
+def impedance_pu(z: float, net_sn_mva: float, net_vn_kv: float):
     """
     :param z: per-unit Impedance
     :param net_sn_mva:
