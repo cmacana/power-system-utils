@@ -3,31 +3,45 @@ from numpy import sqrt
 
 # Utilities for typical power system calculations
 
-def short_circuit_impedance(vk_percent: float, vkr_percent: float, net_sn_mva: float, sn_mva: float):
+def short_circuit_impedance_by_voltage(vk_percent: float, vkr_percent: float, net_sn: float, sn: float):
     """
     :param vk_percent: short circuit voltage [%]
     :param vkr_percent: real component of short circuit voltage [%]
-    :param net_sn_mva: reference apparent power for per unit system [MVA]
-    :param sn_mva: rated apparent power of the transformer [MVA]
+    :param net_sn: reference apparent power for per unit system [VA]
+    :param sn: rated apparent power of the transformer [VA]
     :return: Transformer short-circuit impedance [Ohm]
     """
-    zk = (vk_percent / 100) * (sn_mva / net_sn_mva)
-    rk = (vkr_percent / 100) * (net_sn_mva / sn_mva)
+    zk = (vk_percent / 100) * (sn / net_sn)
+    rk = (vkr_percent / 100) * (net_sn / sn)
     xk = sqrt(zk ** 2 - rk ** 2)
     return rk + xk * 1j
 
 
-def impedance_pu(z: float, net_sn_mva: float, net_vn_kv: float):
+def impedance_pu(z: float, sn_ref: float, vn_ref: float):
     """
-    :param z: per-unit Impedance
-    :param net_sn_mva:
-    :param net_vn_kv:
+    :param z: Impedance [Ohms]
+    :param sn_mva_ref: reference apparent power for per unit system [VA]
+    :param vn_kv_ref:  reference voltage line-line [V]
+    :return: Impedance in p.u
+    """
+    z_base = vn_ref ** 2 / sn_ref
+    return z / z_base
+
+
+def short_circuit_impedance_by_power(uk: float, vn_kv_ref: float, power: float, sn_mva_ref: float):
+    """
+    :param uk: Short circuit voltage [%].
+    :param vn_kv_ref: reference voltage line-line [V]
+    :param power: Short circuit active power [W].
+    :param sn_mva_ref: reference apparent power [VA]
     :return:
     """
-    z_base = net_vn_kv ** 2 / net_sn_mva
-    return z / z_base
+    rk = power * (vn_kv_ref / sn_mva_ref) ** 2
+    xk = sqrt((uk * vn_kv_ref ** 2 / sn_mva_ref) ** 2 - rk ** 2)
+    return rk + xk * 1j
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print(short_circuit_impedance(vk_percent=0.06, vkr_percent=0.01425, net_sn_mva=0.4, sn_mva=0.4))
+    print(short_circuit_impedance_by_voltage(vk_percent=0.06, vkr_percent=0.01425, net_sn=400e3, sn=400e3))
+
