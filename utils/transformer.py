@@ -1,4 +1,4 @@
-from numpy import sqrt
+from numpy import sqrt, round
 
 
 # Utilities for typical power system calculations
@@ -25,7 +25,7 @@ def impedance_pu(z: float, sn_ref: float, vn_ref: float):
     :return: Impedance in p.u
     """
     z_base = vn_ref ** 2 / sn_ref
-    return z / z_base
+    return round(z / z_base, 3)
 
 
 def short_circuit_impedance_by_power(uk: float, vn_kv_ref: float, power: float, sn_mva_ref: float):
@@ -39,4 +39,3 @@ def short_circuit_impedance_by_power(uk: float, vn_kv_ref: float, power: float, 
     rk = power * (vn_kv_ref / sn_mva_ref) ** 2
     xk = sqrt((uk * vn_kv_ref ** 2 / sn_mva_ref) ** 2 - rk ** 2)
     return rk + xk * 1j
-
