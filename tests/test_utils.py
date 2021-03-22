@@ -8,8 +8,10 @@ def test_impedance_pu():
     assert z_pu == 3.84900
 
 
-def test_short_circuit_impedance():
+def test_short_circuit_impedance_by_voltage():
+    z = short_circuit_impedance_by_voltage(vk_percent=6, vkr_percent=1.425, net_sn=400e3, sn=400e3)
     pass  # TODO:
+    # assert z == []
 
 
 def test_short_circuit_impedance_by_power():

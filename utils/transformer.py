@@ -40,8 +40,3 @@ def short_circuit_impedance_by_power(uk: float, vn_kv_ref: float, power: float, 
     xk = sqrt((uk * vn_kv_ref ** 2 / sn_mva_ref) ** 2 - rk ** 2)
     return rk + xk * 1j
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print(short_circuit_impedance_by_voltage(vk_percent=0.06, vkr_percent=0.01425, net_sn=400e3, sn=400e3))
-
