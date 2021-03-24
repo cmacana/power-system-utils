@@ -6,7 +6,7 @@ from utils.calculations.pu import impedance_pu
 
 def map_buses(pp_net: pp.pandapowerNet):
     new_buses = []
-    print(net.bus)
+    print(pp_net.bus)
     for i, row in list(pp_net.bus.iterrows()):
         if i == 0:
             bus_type = 2
@@ -20,7 +20,7 @@ def map_buses(pp_net: pp.pandapowerNet):
 
 def map_loads(pp_net: pp.pandapowerNet):
     new_loads = []
-    print(net.load)
+    print(pp_net.load)
     for i, row in list(pp_net.load.iterrows()):
         args = [row.bus + 1, i + 1, 1, 1, 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1, 1, 0]
         psse_element = Load(i + 1, *args)
@@ -46,38 +46,46 @@ def map_lines(pp_net: pp.pandapowerNet):
     return new_lines
 
 
-net = ThreeBusesFeederPP().pp_network
-buses = map_buses(net)
-loads = map_loads(net)
-fixed_shunts = []
-generators = []
-branches = map_lines(net)
-transformers = []
-areas = []
-tt_dc_lines = []
-vsc_dc_lines = []
-transformer_corrections = []
-mt_dc_lines = []
-line_groupings = []
-zones = []
-transfers = []
-owners = []
-facts = []
-switched_shunts = []
-gnes = []
-induction_machines = []
+def main():
+    net = ThreeBusesFeederPP().pp_network
+    buses = map_buses(net)
+    loads = map_loads(net)
+    fixed_shunts = []
+    generators = []
+    branches = map_lines(net)
+    transformers = []
+    areas = []
+    tt_dc_lines = []
+    vsc_dc_lines = []
+    transformer_corrections = []
+    mt_dc_lines = []
+    line_groupings = []
+    zones = []
+    transfers = []
+    owners = []
+    facts = []
+    switched_shunts = []
+    gnes = []
+    induction_machines = []
 
-ic, sbase, rev, xfrrat, nxfrat, basefrq = [0, 100.0, 33, 0, 0, 50]
-record1, record2 = ['PandaPower Minimal Example', ""]
+    ic, sbase, rev, xfrrat, nxfrat, basefrq = [0, 100.0, 33, 0, 0, 50]
+    record1, record2 = ['PandaPower Minimal Example', ""]
 
-case = Case(ic, sbase, rev, xfrrat, nxfrat, basefrq, record1, record2,
-            buses, loads, fixed_shunts, generators, branches, transformers, areas,
-            tt_dc_lines, vsc_dc_lines, transformer_corrections, mt_dc_lines,
-            line_groupings, zones, transfers, owners, facts, switched_shunts,
-            gnes, induction_machines)
+    case = Case(ic, sbase, rev, xfrrat, nxfrat, basefrq, record1, record2,
+                buses, loads, fixed_shunts, generators, branches, transformers, areas,
+                tt_dc_lines, vsc_dc_lines, transformer_corrections, mt_dc_lines,
+                line_groupings, zones, transfers, owners, facts, switched_shunts,
+                gnes, induction_machines)
 
-print(case.to_psse())
-print(case.validate())
-f = open("simple_example.raw", "w")
-f.write(case.to_psse())
-f.close()
+    print(case.to_psse())
+    if case.validate() is None:
+        print("Successful case validation")
+    print("Writing .raw file")
+    f = open("simple_example.raw", "w")
+    f.write(case.to_psse())
+    f.close()
+    print("Writing file finished.")
+
+
+if __name__ == "__main__":
+    main()
