@@ -39,3 +39,5 @@ def short_circuit_impedance_by_power(uk: float, vn_kv_ref: float, power: float, 
     rk = power * (vn_kv_ref / sn_mva_ref) ** 2
     xk = sqrt((uk * vn_kv_ref ** 2 / sn_mva_ref) ** 2 - rk ** 2)
     return rk + xk * 1j
+
+# TODO: Add https://github.com/zepben/pp-translator/blob/BasicNetwork/src/pp-translator/conversion/Transformer_to_pp.py
