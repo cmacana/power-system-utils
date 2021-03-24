@@ -17,17 +17,6 @@ def short_circuit_impedance_by_voltage(vk_percent: float, vkr_percent: float, ne
     return rk + xk * 1j
 
 
-def impedance_pu(z: float, sn_ref: float, vn_ref: float):
-    """
-    :param z: Impedance [Ohms]
-    :param sn_mva_ref: reference apparent power for per unit system [VA]
-    :param vn_kv_ref:  reference voltage line-line [V]
-    :return: Impedance in p.u
-    """
-    z_base = vn_ref ** 2 / sn_ref
-    return round(z / z_base, 3)
-
-
 def short_circuit_impedance_by_power(uk: float, vn_kv_ref: float, power: float, sn_mva_ref: float):
     """
     :param uk: Short circuit voltage [%].
