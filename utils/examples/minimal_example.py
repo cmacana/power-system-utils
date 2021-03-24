@@ -24,6 +24,4 @@ class ThreeBusesFeederPP:
         return self.pp_network.res_bus
 
 
-net1 = ThreeBusesFeederPP()
-df: pd.DataFrame = net1.get_load_flow_results()
-df.to_csv('pp_result.csv')
+
