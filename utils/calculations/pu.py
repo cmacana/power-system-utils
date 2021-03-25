@@ -6,4 +6,4 @@ def impedance_pu(z: float, sn_ref: float, vn_ref: float):
     :return: Impedance in p.u
     """
     z_base = vn_ref ** 2 / sn_ref
-    return round(z / z_base, 3)
+    return round(z / z_base, 4)
