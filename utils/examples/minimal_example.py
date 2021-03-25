@@ -1,5 +1,4 @@
 import pandapower as pp
-import pandas as pd
 
 
 class ThreeBusesFeederPP:
@@ -24,4 +23,12 @@ class ThreeBusesFeederPP:
         return self.pp_network.res_bus
 
 
+def main():
+    net = ThreeBusesFeederPP().pp_network
+    print(net.trafo)
+    net.load.to_csv("load.csv")
+    print(net)
 
+
+if __name__ == "__main__":
+    main()
