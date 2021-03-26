@@ -102,7 +102,6 @@ def map_transformers(pp_net: pp.pandapowerNet):
             sn=row.sn_mva), sn_ref=row.sn_mva, vn_ref=row.vn_hv_kv)
 
         second_line = TransformerParametersSecondLineShort(r12=z12.real, x12=z12.imag, sbase12=row.sn_mva)
-        transformer_winding_args = [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 1.1, 0.9, 1.1, 0.9, 33, 0, 0.0, 0.0, 0.0]
         w1 = TransformerWinding(
             index=1,  # (int): transformer winding identifier (1,2,3)
             windv=1,  # (float): off-nominal turn ratio (p.u.) (default = 1.0)
@@ -145,7 +144,7 @@ def write_raw_file(case):
     print("Writing file finished.")
 
 
-def main():
+def map_network_data(case_name: str = " "):
     net = ThreeBusesFeederPP().pp_network
     buses = map_buses(net)
     loads = map_loads(net)
@@ -168,13 +167,18 @@ def main():
     induction_machines = []
 
     ic, sbase, rev, xfrrat, nxfrat, basefrq = [0, 100.0, 33, 0, 0, 50]
-    record1, record2 = ['PandaPower Minimal Example', ""]
-    case = Case(ic, sbase, rev, xfrrat, nxfrat, basefrq, record1, record2,
-                buses, loads, fixed_shunts, generators, branches, transformers, areas,
-                tt_dc_lines, vsc_dc_lines, transformer_corrections, mt_dc_lines,
-                line_groupings, zones, transfers, owners, facts, switched_shunts,
-                gnes, induction_machines)
+    record1, record2 = [case_name, ""]
+    case_args = [ic, sbase, rev, xfrrat, nxfrat, basefrq, record1, record2,
+                 buses, loads, fixed_shunts, generators, branches, transformers, areas,
+                 tt_dc_lines, vsc_dc_lines, transformer_corrections, mt_dc_lines,
+                 line_groupings, zones, transfers, owners, facts, switched_shunts,
+                 gnes, induction_machines]
+    return case_args
 
+
+def main():
+    args = map_network_data(case_name="PandaPower Minimal Example")
+    case = Case(*args)
     write_raw_file(case)
 
 
