@@ -2,8 +2,8 @@ from grg_pssedata.struct import Case, Bus, Branch, Load, TwoWindingTransformer, 
     TransformerParametersSecondLineShort, TransformerWinding, TransformerWindingShort
 
 from minimal_example import *
-from utils.calculations.pu import impedance_pu
-from utils.calculations.transformer import short_circuit_impedance_by_voltage
+from psutils.calculations.pu import impedance_pu
+from psutils.calculations.transformer import short_circuit_impedance_by_voltage
 
 
 def map_buses(pp_net: pp.pandapowerNet):

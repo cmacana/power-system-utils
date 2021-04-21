@@ -1,4 +1,4 @@
-from numpy import sqrt, round
+from numpy import sqrt
 
 
 # Utilities for typical power system calculations

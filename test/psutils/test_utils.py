@@ -1,6 +1,7 @@
 import numpy as np
 
-from utils.calculations.transformer import *
+from psutils.calculations.transformer import *
+from psutils.calculations.pu import *
 
 
 def test_impedance_pu():
