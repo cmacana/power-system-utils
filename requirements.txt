@@ -13,12 +13,17 @@ chardet==4.0.0
 colorama==0.4.4
 cryptography==3.4.6
 cycler==0.10.0
+dataclassy==0.6.2
 decorator==4.4.2
 defusedxml==0.7.1
 deprecation==2.1.0
+ecdsa==0.16.1
 entrypoints==0.3
 et-xmlfile==1.0.1
+future==0.18.2
 grg-pssedata==0.1.4
+grpcio==1.36.0
+grpcio-tools==1.36.0
 idna==2.10
 importlib-metadata==3.7.3
 iniconfig==1.1.1
@@ -65,8 +70,11 @@ Pillow==8.2.0
 pluggy==0.13.1
 prometheus-client==0.10.1
 prompt-toolkit==3.0.18
+protobuf==3.15.8
+-e git+https://github.com/cmacana/power-system-utils.git@5b811d2d63f3d09e13e712090b78117b3832f07e#egg=psutils
 py==1.10.0
 pycparser==2.20
+pycryptodome==3.3.1
 Pygments==2.8.1
 pyparsing==2.4.7
 pypiwin32==223
@@ -75,6 +83,7 @@ pyshp==2.1.3
 pytest==6.2.2
 python-certifi-win32==1.6
 python-dateutil==2.8.1
+python-jose-cryptodome==1.3.2
 pytz==2021.1
 pywin32==300
 pywin32-ctypes==0.2.0
@@ -108,4 +117,6 @@ winkerberos==0.8.0
 wrapt==1.12.1
 xlrd==2.0.1
 XlsxWriter==1.3.7
+zepben.evolve==0.22.0
+zepben.protobuf==0.13.0
 zipp==3.4.1
