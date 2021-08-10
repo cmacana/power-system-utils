@@ -1,7 +1,7 @@
 from zepben.evolve import PowerTransformerEnd
 
 from psutils.calculations.compute_star_impedance import ShortCircuitTest, NoLoadTest, TransformerStarImpedance, \
-    transformer_test_to_star_impedance
+    transformer_test_to_rx
 
 
 def test_compute_star_impedance():
@@ -14,6 +14,6 @@ def test_compute_star_impedance():
     pte.rated_u = 400e3
     sc_test = ShortCircuitTest(power=2020180, voltage=11.85)
     nl_test = NoLoadTest()
-    tsi: TransformerStarImpedance = transformer_test_to_star_impedance(pte=pte, sc_test=sc_test, nl_test=nl_test)
+    tsi: TransformerStarImpedance = transformer_test_to_rx(pte=pte, sc_test=sc_test, nl_test=nl_test)
     assert tsi.r == r
     assert tsi.x == x
